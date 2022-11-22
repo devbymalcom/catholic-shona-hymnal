@@ -1,6 +1,3 @@
-// Copyright 2020 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
 
 import 'package:catholic_hymnal/providers/api_provider.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +8,11 @@ import 'screens/favorites.dart';
 import 'screens/home.dart';
 
 void main() {
-  runApp(const TestingApp());
+  runApp(const HymnalApp());
 }
 
-class TestingApp extends StatelessWidget {
-  const TestingApp({super.key});
+class HymnalApp extends StatelessWidget {
+  const HymnalApp({super.key});
 
   @override
   Widget build(BuildContext context) {

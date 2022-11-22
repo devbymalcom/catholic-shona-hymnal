@@ -4,7 +4,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../model/hymn.dart';
+import '../models/hymn.dart';
 
 class DatabaseService {
   static Database? _database;
@@ -64,6 +64,17 @@ class DatabaseService {
   }
 
   Future<List<Hymn>> getAllHymns() async {
+    final db = await database;
+    final res = await db.rawQuery("SELECT * FROM $hymnalTable");
+    List<Hymn> list = [];
+    for (var c in res.toList()) {
+      list.add(Hymn.fromMap(c));
+    }
+    offlineFetchedList = list;
+    return offlineFetchedList;
+  }
+
+  Future<List<Hymn>> getAllFavHymns() async {
     final db = await database;
     final res = await db.rawQuery("SELECT * FROM $hymnalTable");
     List<Hymn> list = [];

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import '../model/hymn.dart';
+import '../models/hymn.dart';
 import 'database_services.dart';
 
 class ApiProvider extends ChangeNotifier {

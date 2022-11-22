@@ -58,3 +58,4 @@ class Hymn {
 }
 
 List<Hymn> offlineFetchedList = [];
+List<Hymn> favoritesList = [];
