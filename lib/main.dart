@@ -1,5 +1,5 @@
-
 import 'package:catholic_hymnal/providers/api_provider.dart';
+import 'package:catholic_hymnal/screens/hymn_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

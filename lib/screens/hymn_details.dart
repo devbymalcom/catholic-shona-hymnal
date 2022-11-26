@@ -5,10 +5,9 @@ import '../providers/database_services.dart';
 
 class HymnDetailsScreen extends StatefulWidget {
   final int hymnNumberId;
+  static const routeName = '/hymn_details';
 
   const HymnDetailsScreen({super.key, required this.hymnNumberId});
-
-  // const HymnDetailsScreen({Key key, this.hymnNumberId}) : super(key: key);
 
   @override
   State<HymnDetailsScreen> createState() => _HymnDetailsScreenState();
@@ -32,18 +31,20 @@ class _HymnDetailsScreenState extends State<HymnDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Hymn;
+
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: lightColorScheme.primary,
         leading: IconButton(
-            //color: lightColorScheme.onSecondary,
+            //  color: lightColorScheme.onSecondary,
             onPressed: () {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back)),
         actions: [
           IconButton(
-              //color: lightColorScheme.onSecondary,
+              //  color: lightColorScheme.onSecondary,
               onPressed: () {},
               icon: const Icon(Icons.bookmark_border)),
           IconButton(
@@ -144,14 +145,14 @@ class _HymnDetailsScreenState extends State<HymnDetailsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    hymn.hymnTitle,
+                    args.hymnTitle,
                     style: TextStyle(fontSize: 24),
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   Text(
-                    hymn.hymnLyrics,
+                    args.hymnLyrics,
                     style: TextStyle(fontSize: 16),
                   ),
                 ],
