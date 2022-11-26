@@ -48,6 +48,9 @@ class HomePage extends StatelessWidget {
                     Hymn hymn = offlineFetchedList[index];
                     final favoritesList = context.watch<Favorites>();
 
+                    /** */
+                    // if (favoritesList.items
+                    //     .contains(offlineFetchedList.indexOf(hymn))) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
@@ -82,11 +85,18 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     );
-                    // return ItemTile(
-                    //   index,
-                    //   hymn: hymn,
-                    // );
-                  });
+                  }
+                  // return Container(
+                  //   child: Text(';'),
+                  // );
+                  /** */
+
+                  // return ItemTile(
+                  //   index,
+                  //   hymn: hymn,
+                  // );
+                  //}
+                  );
             }
             return const CircularProgressIndicator();
           }),

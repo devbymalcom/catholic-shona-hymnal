@@ -32,9 +32,10 @@ class FavoritesPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       itemBuilder: (context, index) {
                         //Hymn hymn =  DatabaseService().readHymn(value.items[index]);
-                        //Hymn hymn = offlineFetchedList[value.items[index]];
+                        Hymn hymn = offlineFetchedList[value.items[index]];
 
                         final favoritesList = context.watch<Favorites>();
+
                         return FavoriteItemTile(
                           hymn: hymn,
                           itemNo: value.items[index],
