@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
 const String hymnalTable = 'shona_hymnal';
 
 class HymnFields {
@@ -34,10 +38,10 @@ class Hymn {
     required this.hymnCategory,
   });
 
-  @override
-  String toString() {
-    return '{hymnNumber: $hymnNumber, hymnTitle: $hymnTitle, hymnLyrics: $hymnLyrics, hymnAuthor: $hymnAuthor, hymnCategory$hymnCategory, isFavorite: $isFavorite}';
-  }
+  // @override
+  // String toString() {
+  //   return '{hymnNumber: $hymnNumber, hymnTitle: $hymnTitle, hymnLyrics: $hymnLyrics, hymnAuthor: $hymnAuthor, hymnCategory$hymnCategory, isFavorite: $isFavorite}';
+  // }
 
   factory Hymn.fromMap(Map<String, dynamic> json) => Hymn(
       hymnNumber: json['hymnNumber'],
@@ -55,6 +59,26 @@ class Hymn {
         'hymnAuthor': hymnAuthor,
         'hymnCategory': hymnCategory
       };
+
+  static Map<String, dynamic> toJSON(Hymn hymn) => {
+        'hymnNumber': hymn.hymnNumber,
+        'hymnTitle': hymn.hymnTitle,
+        'isFavorite': hymn.isFavorite ? 1 : 0,
+        'hymnLyrics': hymn.hymnLyrics,
+        'hymnAuthor': hymn.hymnAuthor,
+        'hymnCategory': hymn.hymnCategory
+      };
+
+  // static String encode(List<Hymn> musics) => json.encode(
+  //   musics
+  //       .map<Map<String, dynamic>>((music) => Hymn.toMap(music))
+  //       .toList(),
+  // );
+
+  static List<Hymn> decode(String musics) =>
+      (json.decode(musics) as List<dynamic>)
+          .map<Hymn>((item) => Hymn.fromMap(item))
+          .toList();
 }
 
 List<Hymn> offlineFetchedList = [];

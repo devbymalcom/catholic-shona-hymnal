@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:js_util';
+
+import 'package:catholic_hymnal/common/app_routes.dart';
 import 'package:catholic_hymnal/common/navigation_drawer.dart';
 import 'package:catholic_hymnal/models/hymn.dart';
 import 'package:catholic_hymnal/models/favorites.dart';
@@ -28,7 +31,7 @@ class HomePage extends StatelessWidget {
           TextButton.icon(
             style: TextButton.styleFrom(foregroundColor: Colors.white),
             onPressed: () {
-              Navigator.pushNamed(context, FavoritesPage.routeName);
+              Navigator.pushNamed(context, AppRoutes.favorites);
             },
             icon: const Icon(Icons.favorite_border),
             label: const Text('Favorites'),
@@ -54,6 +57,13 @@ class HomePage extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
+                        //             onTap: Navigator.of(context).push(MaterialPageRoute(
+                        // builder: (context) =>
+                        //     HymnDetailsScreen(hymnNumberId: widget.hymn.hymnNumber))),
+                        onTap: (() {
+                          Navigator.pushNamed(context, AppRoutes.details,
+                              arguments: hymn);
+                        }),
                         leading: CircleAvatar(
                           backgroundColor:
                               Colors.primaries[index % Colors.primaries.length],
@@ -65,19 +75,21 @@ class HomePage extends StatelessWidget {
                         ),
                         trailing: IconButton(
                           key: Key('icon_$index'),
-                          icon: favoritesList.items.contains(index)
-                              ? const Icon(Icons.favorite)
-                              : const Icon(Icons.favorite_border),
+                          icon:
+                              //favoritesList.items.every((item) => item != null && item is Hymn))
+
+                              favoritesList.items.contains(hymn)
+                                  ? const Icon(Icons.favorite)
+                                  : const Icon(Icons.favorite_border),
                           onPressed: () {
-                            !favoritesList.items.contains(index)
-                                ? favoritesList.add(index)
-                                : favoritesList.remove(index);
+                            !favoritesList.items.contains(hymn)
+                                ? favoritesList.add(hymn)
+                                : favoritesList.remove(hymn);
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text(
-                                    favoritesList.items.contains(index)
-                                        ? 'Added to favorites.'
-                                        : 'Removed from favorites.'),
+                                content: Text(favoritesList.items.contains(hymn)
+                                    ? 'Added to favorites.'
+                                    : 'Removed from favorites.'),
                                 duration: const Duration(seconds: 1),
                               ),
                             );
