@@ -81,8 +81,8 @@ class DatabaseService {
     for (var c in res.toList()) {
       list.add(Hymn.fromMap(c));
     }
-    offlineFetchedList = list;
-    return offlineFetchedList;
+    favoritesList = list;
+    return favoritesList;
   }
 
   Future<int> updateHymn(Hymn hymn) async {
